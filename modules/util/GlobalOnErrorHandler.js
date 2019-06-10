@@ -12,32 +12,32 @@
 const handlers = [];
 
 // If an old handler exists, also fire its events.
-const oldOnErrorHandler = window.onerror;
+// const oldOnErrorHandler = window.onerror;
 
 /**
  * Custom error handler that calls the old global error handler and executes
  * all handlers that were previously added.
  */
-function JitsiGlobalErrorHandler(...args) {
-    handlers.forEach(handler => handler(...args));
-    oldOnErrorHandler && oldOnErrorHandler(...args);
-}
+// function JitsiGlobalErrorHandler(...args) {
+//     handlers.forEach(handler => handler(...args));
+//     oldOnErrorHandler && oldOnErrorHandler(...args);
+// }
 
 // If an old handler exists, also fire its events.
-const oldOnUnhandledRejection = window.onunhandledrejection;
+// const oldOnUnhandledRejection = window.onunhandledrejection;
 
 /**
  * Custom handler that calls the old global handler and executes all handlers
  * that were previously added. This handler handles rejected Promises.
  */
-function JitsiGlobalUnhandledRejection(event) {
-    handlers.forEach(handler => handler(null, null, null, null, event.reason));
-    oldOnUnhandledRejection && oldOnUnhandledRejection(event);
-}
+// function JitsiGlobalUnhandledRejection(event) {
+//     handlers.forEach(handler => handler(null, null, null, null, event.reason));
+//     oldOnUnhandledRejection && oldOnUnhandledRejection(event);
+// }
 
 // Setting the custom error handlers.
-window.onerror = JitsiGlobalErrorHandler;
-window.onunhandledrejection = JitsiGlobalUnhandledRejection;
+// window.onerror = JitsiGlobalErrorHandler;
+// window.onunhandledrejection = JitsiGlobalUnhandledRejection;
 
 const GlobalOnErrorHandler = {
     /**
@@ -53,12 +53,14 @@ const GlobalOnErrorHandler = {
      * @param error the error to pass to the error handler
      */
     callErrorHandler(error) {
-        const errHandler = window.onerror;
+        console.warn(error);
 
-        if (!errHandler) {
-            return;
-        }
-        errHandler(null, null, null, null, error);
+        // const errHandler = window.onerror;
+        //
+        // if (!errHandler) {
+        //     return;
+        // }
+        // errHandler(null, null, null, null, error);
     },
 
     /**
@@ -66,12 +68,14 @@ const GlobalOnErrorHandler = {
      * @param error the error to pass to the rejection handler.
      */
     callUnhandledRejectionHandler(error) {
-        const errHandler = window.onunhandledrejection;
+        console.warn(error);
 
-        if (!errHandler) {
-            return;
-        }
-        errHandler(error);
+        // const errHandler = window.onunhandledrejection;
+        //
+        // if (!errHandler) {
+        //     return;
+        // }
+        // errHandler(error);
     }
 };
 
