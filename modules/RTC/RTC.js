@@ -255,6 +255,7 @@ export default class RTC extends Listenable {
      * @param {string} options.resolution Resolution constraints.
      * @param {string} options.cameraDeviceId
      * @param {string} options.micDeviceId
+     * @param {boolean} options.skipDataCheck
      * @returns {*} Promise object that will receive the new JitsiTracks
      */
     static obtainAudioAndVideoPermissions(options) {
@@ -269,7 +270,7 @@ export default class RTC extends Listenable {
                     ? _newCreateLocalTracks(tracksInfo)
                     : createLocalTracks(tracksInfo, options);
 
-                return tracks.some(track => !track._isReceivingData())
+                return !options.skipDataCheck && tracks.some(track => !track._isReceivingData())
                     ? Promise.reject(
                         new JitsiTrackError(
                             JitsiTrackErrors.NO_DATA_FROM_SOURCE))
