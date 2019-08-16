@@ -1719,18 +1719,18 @@ JitsiConference.prototype.onIncomingCall = function(
     if (jingleSession.isP2P) {
         this._onIncomingCallP2P(jingleSession, jingleOffer);
     } else {
-        if (!this.room.isFocus(jingleSession.remoteJid)) {
-            const description = 'Rejecting session-initiate from non-focus.';
+        // if (!this.room.isFocus(jingleSession.remoteJid)) {
+        //     const description = 'Rejecting session-initiate from non-focus.';
 
-            this._rejectIncomingCall(
-                jingleSession, {
-                    reason: 'security-error',
-                    reasonDescription: description,
-                    errorMsg: description
-                });
+        //     this._rejectIncomingCall(
+        //         jingleSession, {
+        //             reason: 'security-error',
+        //             reasonDescription: description,
+        //             errorMsg: description
+        //         });
 
-            return;
-        }
+        //     return;
+        // }
         this._acceptJvbIncomingCall(jingleSession, jingleOffer, now);
     }
 };
