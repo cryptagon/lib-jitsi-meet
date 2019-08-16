@@ -914,18 +914,6 @@ class RTCUtils extends Listenable {
 
             this.p2pPcConstraints
                 = JSON.parse(JSON.stringify(this.pcConstraints));
-
-            // Allows sending of video to be suspended if the bandwidth
-            // estimation is too low.
-            if (!options.disableSuspendVideo) {
-                this.pcConstraints.optional.push(
-                    { googSuspendBelowMinBitrate: true });
-            }
-
-            // There's no reason not to use this for p2p
-            this.p2pPcConstraints.optional.push({
-                googSuspendBelowMinBitrate: true
-            });
         }
 
         this.p2pPcConstraints = this.p2pPcConstraints || this.pcConstraints;
